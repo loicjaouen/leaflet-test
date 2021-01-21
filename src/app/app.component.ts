@@ -9,7 +9,7 @@ import { latLng, LatLngBounds, tileLayer, imageOverlay } from 'leaflet';
 export class AppComponent {
   title = 'leaflet-tile-test';
 
-  bounds =  new LatLngBounds([200 , -300], [-200, 300]);
+  bounds =  new LatLngBounds([0 , 0], [600, 400]);
   imageOverlay = imageOverlay('/assets/images/big-tree.jpg', this.bounds);
   base = tileLayer('', {
     maxZoom: 8,
