@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { latLng, tileLayer } from 'leaflet';
+import { latLng, LatLngBounds, tileLayer, imageOverlay } from 'leaflet';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +9,19 @@ import { latLng, tileLayer } from 'leaflet';
 export class AppComponent {
   title = 'leaflet-tile-test';
 
+  bounds =  new LatLngBounds([200 , -300], [-200, 300]);
+  imageOverlay = imageOverlay('/assets/images/big-tree.jpg', this.bounds);
+  base = tileLayer('', {
+    maxZoom: 8,
+    detectRetina: true
+  });
+
   options = {
     layers: [
-      tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
-      })
+      this.imageOverlay, this.base
     ],
-    zoom: 8,
-    center: latLng([ 46.5, 6.5 ])
+    zoom: 0 ,
+    center: this.bounds.getCenter()
   };
 
 }
